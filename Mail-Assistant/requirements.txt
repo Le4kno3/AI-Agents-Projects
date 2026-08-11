@@ -1,0 +1,6 @@
+langchain
+langchain-ollama
+langgraph
+python-dotenv
+imap-client
+imap-tools
