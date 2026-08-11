@@ -25,6 +25,8 @@ vector_store = InMemoryVectorStore(embeddings)
 
 model = OllamaLLM(model=MODEL_NAME)
 
+#######################################################################################################################
+# Generate relevant Context (documents) for RAG Processing
 def load_page(url):
     # Fetch the webpage contents (we dont need to clean it, as langchain handles it)
     loader = SeleniumURLLoader(
@@ -47,6 +49,8 @@ def split_text(documents):
     data = text_splitter.split_documents(documents)
     return data # Returns the list of documents, splitted based on max document size.
 
+
+#######################################################################################################################
 # Add the documents to the vector store.
 def index_docs(documents):
     vector_store.add_documents(documents)
@@ -55,6 +59,8 @@ def index_docs(documents):
 def retrieve_docs(query):
     return vector_store.similarity_search(query)
 
+
+#######################################################################################################################
 # Feed the vector store response (context) and the user query to the LLM.
 def answer_question(question, context):
     # Build prompt using template
@@ -64,7 +70,8 @@ def answer_question(question, context):
     # Invoke the chain with the question and context
     return chain.invoke({"question": question, "context": context})
 
-# Design the UI
+#########################################################################################################################
+# Design the UI & Orchestrate Processing
 st.title("AI Crawler")
 url = st.text_input("Enter URL:")
 
@@ -92,5 +99,3 @@ if question:
     answer = answer_question(question, context)
     # 5.5 Print the answer on chat UI
     st.chat_message("assistant").write(answer)
-
-
