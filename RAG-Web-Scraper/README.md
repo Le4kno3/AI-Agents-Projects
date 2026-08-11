@@ -1,6 +1,9 @@
 # Details
 RAG Web Scrapper AI Agent
 
+# AI Agent Architecture
+![RAG Web Scrapper Architecture](Screenshots/flowDiagram.png)
+
 # Install python requirements
 pip install -r requirements.txt
 
